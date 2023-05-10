@@ -1,11 +1,10 @@
 /// <reference types="cypress" />
+import {usersUrl} from '../support/commands.js'
+
 const headers = {
   'accept': 'application/json',
   'Content-Type': 'application/json'
 };
-
-const baseUrl = 'https://serverest.dev';
-const usersUrl = `${baseUrl}/usuarios`;
 
 const generateRandomLetters = (length) => {
   let result = '';
@@ -45,7 +44,9 @@ describe('Cadastro de usuários', () => {
       administrador: "true"
     };
     createUser(payload).then((response) => {
+      const id = response.body._id;
       expect(response.status).to.eq(201);
+      expect(response.body._id).to.equal;
       expect(response.body.message).to.equal('Cadastro realizado com sucesso');
     });
   });
@@ -82,4 +83,3 @@ describe('Cadastro de usuários', () => {
       expect(response.body.message).to.equal('Este email já está sendo usado');
     });
   });
-
