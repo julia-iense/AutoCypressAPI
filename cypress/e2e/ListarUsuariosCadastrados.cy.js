@@ -1,10 +1,5 @@
-/// <reference types="Cypress" />
 import {usersUrl} from '../support/commands.js'
-
-const headers = {
-  'accept': 'application/json',
-  'Content-Type': 'application/json'
-};
+import {headers} from '../support/commands.js'
 
 const ListUser = (payload) => {
   return cy.request({
@@ -48,16 +43,13 @@ describe('Listar usuários cadastrados', () => {
     });
   });
   it('Listar usuários - pesquisa por _id', () => {
-    const payload = {
-      _id: "generateRandomLetters",
-    };
-    cy.log(payload)
+      const payload = {
+        _id: Cypress.env('idGerado')
+      };
     ListUser(payload).then((response) => {
       expect(response.status).to.eq(200);
       expect(response.body.quantidade).to.have.property;
-      expect(response.body.usuarios).to.have.property
+      expect(response.body.usuarios).to.have.property;
+      });
     });
-  });
-});
-
-
+  })
