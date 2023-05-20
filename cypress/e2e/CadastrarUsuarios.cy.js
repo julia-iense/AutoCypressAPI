@@ -1,9 +1,5 @@
-import {usersUrl} from '../support/commands.js'
-import {generateRandomLetters} from '../support/commands.js'
-import {headers} from '../support/commands.js'
 import {createUser} from '../support/commands.js'
 
-describe('Cadastro de usuários', () => {}) 
   it('Não deve cadastrar usuário com nome ou senha em branco', () => {
     const payload = {
       nome: "",
@@ -20,12 +16,6 @@ describe('Cadastro de usuários', () => {})
 
   it('Não deve cadastrar usuário com email já existente', () => {
     const payload = {
-      nome: "testes",
-      email: "testes@qa.com.br",
-      password: "testes",
-      administrador: "true"
-    };
-    const payloads = {
       nome: "testes",
       email: "testes@qa.com.br",
       password: "testes",

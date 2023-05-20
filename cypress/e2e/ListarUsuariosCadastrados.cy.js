@@ -1,16 +1,7 @@
 import {usersUrl} from '../support/commands.js'
 import {headers} from '../support/commands.js'
-
-const ListUser = (payload) => {
-  return cy.request({
-    method: 'GET',
-    url: usersUrl,
-    headers: headers,
-    failOnStatusCode: false,
-    qs: payload
-  });
-};
-
+import {ListUser} from '../support/commands.js'
+import {idgerado} from '../support/commands.js'
 describe('Listar usuários cadastrados', () => {
   it('Listar usuários com somente nome', () => {
     const payload = {
@@ -44,12 +35,20 @@ describe('Listar usuários cadastrados', () => {
   });
   it('Listar usuários - pesquisa por _id', () => {
       const payload = {
-        _id: Cypress.env('idGerado')
+        _id: idgerado
       };
+    cy.log(payload)
     ListUser(payload).then((response) => {
       expect(response.status).to.eq(200);
-      expect(response.body.quantidade).to.have.property;
-      expect(response.body.usuarios).to.have.property;
+      expect(response.quantidade).to.eq(1);
+      expect(response.body.usuarios.email).to.equal('testetest@qa.com.br')
+      //expect(response.body.quantidade).to.eq(1);
+
+      // const usuario = response.body.usuarios[0];
+      // expect(usuario.nome).to.eq('teste');
+      // expect(usuario.email).to.equal('testetest@qa.com.br');
+      // expect(usuario.password).to.equal('testes2002');
+      // expect(usuario.administrador).to.equal('true');
       });
     });
   })

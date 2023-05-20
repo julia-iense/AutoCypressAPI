@@ -22,3 +22,16 @@ it('Sem usuário cadastrado', () => {
     expect(response.body.message).to.equal('Email e/ou senha inválidos');
   });
 });
+it('Login', () => {
+  const payload = {
+      email: "testetest@qa.com.br",
+      password: "testes2002",
+  };
+  login(payload).then((response) => {
+  const token = response.body.token;
+  Cypress.env('token', response.body.authorization)
+  cy.log(token);
+    expect(response.status).to.eq(200);
+    expect(response.body.authorization).to.have.property;
+  });
+});
